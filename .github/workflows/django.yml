@@ -10,13 +10,14 @@ jobs:
   build:
     strategy:
       matrix:
-        pyversion: ['3.8','3.9']
+        pyversion: ['3.8', '3.9']
+        postgres_version: ['11.18-bullseye', '13', '14']
 
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:11.18-bullseye
+        image: postgres:${{ matrix.postgres_version }}
         env:
           POSTGRES_USER: decide
           POSTGRES_PASSWORD: decide
