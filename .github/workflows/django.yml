@@ -1,26 +1,19 @@
-name: Python application
+name: Django CI
 
 on:
-  push:
-    branches:
-      - develop
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_call:
 
 jobs:
   build:
     strategy:
       matrix:
         pyversion: ['3.8', '3.9']
-        postgres_version: ['11.18-bullseye', '13', '14']
 
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:${{ matrix.postgres_version }}
+        image: postgres:11.18-bullseye
         env:
           POSTGRES_USER: decide
           POSTGRES_PASSWORD: decide
